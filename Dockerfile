@@ -6,9 +6,13 @@ RUN apk -U upgrade \
     && apk add --no-cache jellyfin jellyfin-web jellyfin-ffmpeg libstdc++ \
     && rm -rf /var/cache/apk/*
 
-RUN --network=none sed -i 's/--nowebclient//g' /etc/conf.d/jellyfin
+RUN mkdir -p /var/lib/jellyfin \
+    /var/cache/jellyfin \
+    /var/log/jellyfin \
+    /usr/share/webapps/jellyfin-web \
+    /media
 
-RUN --network=none chown -R jellyfin:jellyfin \
+RUN chown -R jellyfin:jellyfin \
     /var/lib/jellyfin \
     /var/cache/jellyfin \
     /var/log/jellyfin \
@@ -17,6 +21,8 @@ RUN --network=none chown -R jellyfin:jellyfin \
 
 COPY --from=ghcr.io/polarix-containers/hardened_malloc:latest /install /usr/local/lib/
 ENV LD_PRELOAD="/usr/local/lib/libhardened_malloc.so"
+
+RUN sed -i 's/--nowebclient//g' /etc/conf.d/jellyfin
 
 USER jellyfin
 
