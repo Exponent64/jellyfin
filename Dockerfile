@@ -22,9 +22,13 @@ RUN chown -R jellyfin:jellyfin \
 COPY --from=ghcr.io/polarix-containers/hardened_malloc:latest /install /usr/local/lib/
 ENV LD_PRELOAD="/usr/local/lib/libhardened_malloc.so"
 
+RUN cat /etc/conf.d/jellyfin
+
 RUN sed -i 's/--nowebclient//g' /etc/conf.d/jellyfin
 
 USER jellyfin
+
+RUN cat /etc/conf.d/jellyfin
 
 EXPOSE 8096/tcp
 
