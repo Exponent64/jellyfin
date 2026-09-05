@@ -1,6 +1,6 @@
-FROM alpine:latest
+FROM alpine:edge
 
-RUN echo "https://dl-cdn.alpinelinux.org/alpine/latest-stable/community" >> /etc/apk/repositories
+RUN echo "https://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories
 
 RUN apk -U upgrade \
     && apk add --no-cache jellyfin jellyfin-web jellyfin-ffmpeg libstdc++ \
