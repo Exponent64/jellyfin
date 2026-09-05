@@ -6,8 +6,6 @@ RUN apk -U upgrade \
     && apk add --no-cache jellyfin jellyfin-web jellyfin-ffmpeg libstdc++ \
     && rm -rf /var/cache/apk/*
 
-RUN mkdir -p /var/lib/jellyfin/media
-
 RUN mkdir -p /config /cache /media
 RUN chown -R jellyfin:jellyfin /config /cache /media /usr/share/webapps/jellyfin-web
 
